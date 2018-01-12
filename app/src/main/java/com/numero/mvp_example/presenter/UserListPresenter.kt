@@ -18,6 +18,7 @@ class UserListPresenter(context: Context, private val view: UserListContract.Vie
     }
 
     override fun subscribe() {
+        view.clearUserList()
         executeLoadUserList()
     }
 

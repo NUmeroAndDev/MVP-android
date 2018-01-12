@@ -10,6 +10,8 @@ interface UserListContract {
 
         fun showUserList(userList: List<User>)
 
+        fun clearUserList()
+
         fun showEmptyMessage()
 
         fun showErrorMessage(e: Throwable?)

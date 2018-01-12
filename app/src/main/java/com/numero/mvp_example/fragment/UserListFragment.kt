@@ -36,7 +36,6 @@ class UserListFragment : Fragment(), UserListContract.View {
 
     override fun onResume() {
         super.onResume()
-        userListAdapter.clear()
         presenter.subscribe()
     }
 
@@ -47,6 +46,10 @@ class UserListFragment : Fragment(), UserListContract.View {
 
     override fun setPresenter(presenter: UserListContract.Presenter) {
         this.presenter = presenter
+    }
+
+    override fun clearUserList() {
+        userListAdapter.clear()
     }
 
     override fun selectUser(user: User) {
