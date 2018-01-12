@@ -1,10 +1,11 @@
-package com.numero.mvp_example
+package com.numero.mvp_example.acitivty
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.numero.mvp_example.R
 
 import kotlinx.android.synthetic.main.activity_main.*
 
