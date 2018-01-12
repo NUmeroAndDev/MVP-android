@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import com.numero.mvp_example.R
 import com.numero.mvp_example.contract.UserListContract
 import com.numero.mvp_example.model.User
+import com.numero.mvp_example.view.UserListAdapter
 import kotlinx.android.synthetic.main.fragment_user_list.*
 
 class UserListFragment : Fragment(), UserListContract.View {
 
     private lateinit var presenter: UserListContract.Presenter
+    private val userListAdapter: UserListAdapter = UserListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,12 +30,13 @@ class UserListFragment : Fragment(), UserListContract.View {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
-//            adapter =
+            adapter = userListAdapter
         }
     }
 
     override fun onResume() {
         super.onResume()
+        userListAdapter.clear()
         presenter.subscribe()
     }
 
@@ -51,13 +54,13 @@ class UserListFragment : Fragment(), UserListContract.View {
     }
 
     override fun showUserList(userList: List<User>) {
-        
+        userListAdapter.setUserList(userList)
     }
 
     override fun showEmptyMessage() {
         messageTextView.apply {
             visibility = View.VISIBLE
-            text = "No user"
+            setText(R.string.empty_user_message)
         }
     }
 
