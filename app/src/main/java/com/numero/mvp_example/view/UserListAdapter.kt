@@ -40,6 +40,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
         fun setUser(user: User) {
             itemView.nameTextView.text = user.name
+            itemView.userNameTextView.text = user.userName
         }
     }
 }
