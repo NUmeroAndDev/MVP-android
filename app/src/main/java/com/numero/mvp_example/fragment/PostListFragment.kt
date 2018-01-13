@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import com.numero.mvp_example.R
 import com.numero.mvp_example.contract.PostListContract
 import com.numero.mvp_example.model.Post
+import com.numero.mvp_example.view.PostListAdapter
 import kotlinx.android.synthetic.main.fragment_post_list.*
 
 class PostListFragment : Fragment(), PostListContract.View {
 
     private lateinit var presenter: PostListContract.Presenter
+    private val postAdapter: PostListAdapter = PostListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,7 +30,7 @@ class PostListFragment : Fragment(), PostListContract.View {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
-//            adapter =
+            adapter = postAdapter
         }
     }
 
@@ -47,11 +49,11 @@ class PostListFragment : Fragment(), PostListContract.View {
     }
 
     override fun showPostList(postList: List<Post>) {
-
+        postAdapter.setUserList(postList)
     }
 
     override fun clearPostList() {
-
+        postAdapter.clear()
     }
 
     override fun showEmptyMessage() {
