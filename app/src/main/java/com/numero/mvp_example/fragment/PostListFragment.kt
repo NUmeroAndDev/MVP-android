@@ -1,6 +1,5 @@
 package com.numero.mvp_example.fragment
 
-import android.content.Context
 import android.support.v4.app.Fragment
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
@@ -9,30 +8,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.numero.mvp_example.R
-import com.numero.mvp_example.acitivty.PostListActivity
-import com.numero.mvp_example.contract.UserListContract
-import com.numero.mvp_example.model.User
-import com.numero.mvp_example.view.UserListAdapter
-import kotlinx.android.synthetic.main.fragment_user_list.*
+import com.numero.mvp_example.contract.PostListContract
+import com.numero.mvp_example.model.Post
+import kotlinx.android.synthetic.main.fragment_post_list.*
 
-class UserListFragment : Fragment(), UserListContract.View, UserListAdapter.OnClickListener {
+class PostListFragment : Fragment(), PostListContract.View {
 
-    private lateinit var presenter: UserListContract.Presenter
-    private val userListAdapter: UserListAdapter = UserListAdapter(this)
+    private lateinit var presenter: PostListContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_user_list, container, false)
+        return inflater.inflate(R.layout.fragment_post_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userListRecyclerView.apply {
+        postListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
-            adapter = userListAdapter
+//            adapter =
         }
     }
 
@@ -46,22 +42,16 @@ class UserListFragment : Fragment(), UserListContract.View, UserListAdapter.OnCl
         presenter.unSubscribe()
     }
 
-    override fun setPresenter(presenter: UserListContract.Presenter) {
+    override fun setPresenter(presenter: PostListContract.Presenter) {
         this.presenter = presenter
     }
 
-    override fun clearUserList() {
-        userListAdapter.clear()
+    override fun showPostList(postList: List<Post>) {
+
     }
 
-    override fun selectUser(user: User) {
-        val userId: Long = user.id ?: return
-        val context: Context = context ?: return
-        startActivity(PostListActivity.createIntent(context, userId))
-    }
+    override fun clearPostList() {
 
-    override fun showUserList(userList: List<User>) {
-        userListAdapter.setUserList(userList)
     }
 
     override fun showEmptyMessage() {
@@ -87,11 +77,7 @@ class UserListFragment : Fragment(), UserListContract.View, UserListAdapter.OnCl
         progressbar.visibility = View.INVISIBLE
     }
 
-    override fun onClickUser(user: User) {
-        presenter.selectUser(user)
-    }
-
     companion object {
-        fun newInstance(): UserListFragment = UserListFragment()
+        fun newInstance(): PostListFragment = PostListFragment()
     }
 }

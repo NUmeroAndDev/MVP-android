@@ -2,7 +2,6 @@ package com.numero.mvp_example.acitivty
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.numero.mvp_example.R
@@ -11,7 +10,7 @@ import com.numero.mvp_example.presenter.UserListPresenter
 
 import kotlinx.android.synthetic.main.activity_user_list.*
 
-class UserListActivity : AppCompatActivity() {
+class UserListActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +37,5 @@ class UserListActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
     }
 }

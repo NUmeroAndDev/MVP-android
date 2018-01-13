@@ -3,7 +3,9 @@ package com.numero.mvp_example.api
 import android.content.Context
 
 import com.numero.mvp_example.R
+import com.numero.mvp_example.api.call.PostsCall
 import com.numero.mvp_example.api.call.UsersCall
+import com.numero.mvp_example.model.Post
 import com.numero.mvp_example.model.User
 
 import io.reactivex.Observable
@@ -28,5 +30,9 @@ class ApiClient(context: Context) {
 
     fun loadUserList(): Observable<List<User>> {
         return retrofit.create(UsersCall::class.java).userList
+    }
+
+    fun loadPostList(uerId: Long): Observable<List<Post>> {
+        return retrofit.create(PostsCall::class.java).getPostList(uerId)
     }
 }
