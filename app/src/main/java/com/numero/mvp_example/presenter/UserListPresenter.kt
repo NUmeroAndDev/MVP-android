@@ -31,7 +31,7 @@ class UserListPresenter(context: Context, private val view: UserListContract.Vie
     }
 
     override fun selectUser(user: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.selectUser(user)
     }
 
     override fun loadUserList() {

@@ -8,7 +8,7 @@ import com.numero.mvp_example.R
 import com.numero.mvp_example.model.User
 import kotlinx.android.synthetic.main.view_holder_user.view.*
 
-class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
+class UserListAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
     private val userList: MutableList<User> = mutableListOf()
 
@@ -29,11 +29,20 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.setUser(userList[position])
+        holder.apply {
+            setUser(userList[position])
+            itemView.setOnClickListener {
+                onClickListener.onClickUser(userList[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return userList.size
+    }
+
+    public interface OnClickListener {
+        fun onClickUser(user: User)
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

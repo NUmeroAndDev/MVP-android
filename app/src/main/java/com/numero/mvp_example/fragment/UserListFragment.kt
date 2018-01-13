@@ -13,10 +13,10 @@ import com.numero.mvp_example.model.User
 import com.numero.mvp_example.view.UserListAdapter
 import kotlinx.android.synthetic.main.fragment_user_list.*
 
-class UserListFragment : Fragment(), UserListContract.View {
+class UserListFragment : Fragment(), UserListContract.View, UserListAdapter.OnClickListener {
 
     private lateinit var presenter: UserListContract.Presenter
-    private val userListAdapter: UserListAdapter = UserListAdapter()
+    private val userListAdapter: UserListAdapter = UserListAdapter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -53,7 +53,7 @@ class UserListFragment : Fragment(), UserListContract.View {
     }
 
     override fun selectUser(user: User) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun showUserList(userList: List<User>) {
@@ -81,6 +81,10 @@ class UserListFragment : Fragment(), UserListContract.View {
 
     override fun dismissProgress() {
         progressbar.visibility = View.INVISIBLE
+    }
+
+    override fun onClickUser(user: User) {
+        presenter.selectUser(user)
     }
 
     companion object {
