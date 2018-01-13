@@ -27,7 +27,9 @@ class PostListActivity : BaseActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            title = "${user.name} 's Posts"
+            if (user.name != null) {
+                title = "${user.name} 's Posts"
+            }
         }
 
         var postListFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
