@@ -1,6 +1,5 @@
-# MVP-android
-This is kotlin sample project.  
-Model-View-Presenter (MVP) architecture.
+# MVP-android  
+Android sample application of MVP architecture developed by Kotlin.  
 
 ## API  
 Use [JSONPlaceholder](https://jsonplaceholder.typicode.com/ "JSONPlaceholder").  
