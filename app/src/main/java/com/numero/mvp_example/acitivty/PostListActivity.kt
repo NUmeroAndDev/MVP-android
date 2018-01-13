@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.MenuItem
 import com.numero.mvp_example.R
 import com.numero.mvp_example.fragment.PostListFragment
+import com.numero.mvp_example.model.User
 import com.numero.mvp_example.presenter.PostListPresenter
 
 import kotlinx.android.synthetic.main.activity_user_list.*
@@ -18,11 +19,16 @@ class PostListActivity : BaseActivity() {
         setContentView(R.layout.activity_post_list)
         setSupportActionBar(toolbar)
 
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
+        val user = intent.getSerializableExtra(BUNDLE_USER)
+        if (user !is User) {
+            finish()
+            return
         }
 
-        val userId: Long = intent.getLongExtra(BUNDLE_USER_ID, 0)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = "${user.name} 's Posts"
+        }
 
         var postListFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
         if (postListFragment == null) {
@@ -30,7 +36,7 @@ class PostListActivity : BaseActivity() {
             replaceFragment(postListFragment)
         }
         if (postListFragment is PostListFragment) {
-            PostListPresenter(applicationContext, userId, postListFragment)
+            PostListPresenter(applicationContext, user, postListFragment)
         }
     }
 
@@ -45,9 +51,9 @@ class PostListActivity : BaseActivity() {
     }
 
     companion object {
-        private val BUNDLE_USER_ID: String = "BUNDLE_USER_ID"
-        fun createIntent(context: Context, userId: Long): Intent = Intent(context, PostListActivity::class.java).apply {
-            putExtra(BUNDLE_USER_ID, userId)
+        private val BUNDLE_USER: String = "BUNDLE_USER"
+        fun createIntent(context: Context, user: User): Intent = Intent(context, PostListActivity::class.java).apply {
+            putExtra(BUNDLE_USER, user)
         }
     }
 }

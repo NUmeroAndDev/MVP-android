@@ -55,9 +55,8 @@ class UserListFragment : Fragment(), UserListContract.View, UserListAdapter.OnCl
     }
 
     override fun selectUser(user: User) {
-        val userId: Long = user.id ?: return
         val context: Context = context ?: return
-        startActivity(PostListActivity.createIntent(context, userId))
+        startActivity(PostListActivity.createIntent(context, user))
     }
 
     override fun showUserList(userList: List<User>) {
