@@ -1,7 +1,6 @@
 package com.numero.mvp_example.acitivty
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import com.numero.mvp_example.R
@@ -17,14 +16,11 @@ class UserListActivity : BaseActivity() {
         setContentView(R.layout.activity_user_list)
         setSupportActionBar(toolbar)
 
-        var deviceListFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
-        if (deviceListFragment == null) {
-            deviceListFragment = UserListFragment.newInstance()
-            replaceFragment(deviceListFragment)
-        }
-        if (deviceListFragment is UserListFragment) {
-            UserListPresenter(applicationContext, deviceListFragment)
-        }
+        val userListFragment: UserListFragment = supportFragmentManager.findFragmentById(R.id.container) as UserListFragment? ?:
+                UserListFragment.newInstance().also {
+                    replaceFragment(it)
+                }
+        UserListPresenter(applicationContext, userListFragment)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -3,13 +3,11 @@ package com.numero.mvp_example.acitivty
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.MenuItem
 import com.numero.mvp_example.R
 import com.numero.mvp_example.fragment.PostListFragment
 import com.numero.mvp_example.model.User
 import com.numero.mvp_example.presenter.PostListPresenter
-
 import kotlinx.android.synthetic.main.activity_user_list.*
 
 class PostListActivity : BaseActivity() {
@@ -32,14 +30,11 @@ class PostListActivity : BaseActivity() {
             }
         }
 
-        var postListFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
-        if (postListFragment == null) {
-            postListFragment = PostListFragment.newInstance()
-            replaceFragment(postListFragment)
-        }
-        if (postListFragment is PostListFragment) {
-            PostListPresenter(applicationContext, user, postListFragment)
-        }
+        val postListFragment: PostListFragment = supportFragmentManager.findFragmentById(R.id.container) as PostListFragment? ?:
+                PostListFragment.newInstance().also {
+                    replaceFragment(it)
+                }
+        PostListPresenter(applicationContext, user, postListFragment)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
