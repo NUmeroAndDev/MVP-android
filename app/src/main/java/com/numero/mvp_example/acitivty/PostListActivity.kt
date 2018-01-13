@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.MenuItem
 import com.numero.mvp_example.R
 import com.numero.mvp_example.fragment.PostListFragment
 import com.numero.mvp_example.presenter.PostListPresenter
@@ -17,6 +18,10 @@ class PostListActivity : BaseActivity() {
         setContentView(R.layout.activity_post_list)
         setSupportActionBar(toolbar)
 
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
+
         val userId: Long = intent.getLongExtra(BUNDLE_USER_ID, 0)
 
         var postListFragment: Fragment? = supportFragmentManager.findFragmentById(R.id.container)
@@ -27,6 +32,16 @@ class PostListActivity : BaseActivity() {
         if (postListFragment is PostListFragment) {
             PostListPresenter(applicationContext, userId, postListFragment)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
