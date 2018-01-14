@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".acitivty.UserListActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_licenses"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/licenses_label"
         app:showAsAction="never" />
 </menu>

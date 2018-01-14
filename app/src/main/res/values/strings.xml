@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MVP-Example</string>
-    <string name="action_settings">Settings</string>
+
+    <string name="licenses_label">Licenses</string>
 
     <string name="empty_user_message">No User</string>
 </resources>

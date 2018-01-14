@@ -27,6 +27,11 @@
             android:name=".acitivty.PostListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".acitivty.LicensesActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/licenses_label"/>
+
     </application>
 
 </manifest>
