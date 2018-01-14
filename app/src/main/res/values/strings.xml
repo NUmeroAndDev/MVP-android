@@ -2,6 +2,7 @@
     <string name="app_name">MVP-Example</string>
 
     <string name="licenses_label">Licenses</string>
+    <string name="source_label">Source</string>
 
     <string name="empty_user_message">No User</string>
 </resources>

@@ -2,7 +2,9 @@ package com.numero.mvp_example.activity
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import com.numero.mvp_example.R
 import kotlinx.android.synthetic.main.activity_licenses.*
@@ -25,14 +27,29 @@ class LicensesActivity : BaseActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_licenses, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 finish()
                 return true
             }
+            R.id.action_view_source -> {
+                startSourceView()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun startSourceView() {
+        startActivity(Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(getString(R.string.source_url))
+        })
     }
 
     companion object {

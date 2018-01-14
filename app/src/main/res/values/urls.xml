@@ -2,4 +2,5 @@
 <resources>
     <string name="api_url">https://jsonplaceholder.typicode.com</string>
     <string name="licences_page_url">file:///android_asset/licenses.html</string>
+    <string name="source_url">https://github.com/NUmeroAndDev/MVP-android</string>
 </resources>
