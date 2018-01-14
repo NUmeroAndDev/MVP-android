@@ -1,4 +1,4 @@
-package com.numero.mvp_example.acitivty
+package com.numero.mvp_example.activity
 
 import android.content.Context
 import android.content.Intent

@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.numero.mvp_example.R
-import com.numero.mvp_example.acitivty.PostListActivity
+import com.numero.mvp_example.activity.PostListActivity
 import com.numero.mvp_example.contract.UserListContract
 import com.numero.mvp_example.model.User
 import com.numero.mvp_example.view.UserListAdapter

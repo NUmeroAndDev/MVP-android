@@ -1,4 +1,4 @@
-package com.numero.mvp_example.acitivty
+package com.numero.mvp_example.activity
 
 import android.os.Bundle
 import android.view.Menu
@@ -24,7 +24,7 @@ class UserListActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_user_list, menu)
         return true
     }
 

@@ -1,4 +1,4 @@
-package com.numero.mvp_example.acitivty
+package com.numero.mvp_example.activity
 
 import android.annotation.SuppressLint
 import android.support.v4.app.Fragment
