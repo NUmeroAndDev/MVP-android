@@ -39,7 +39,7 @@ class PostListAdapter() : RecyclerView.Adapter<PostListAdapter.PostViewHolder>()
         return postList.size
     }
 
-    class PostViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class PostViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun setPost(post: Post) {
             titleTextView.text = post.title
