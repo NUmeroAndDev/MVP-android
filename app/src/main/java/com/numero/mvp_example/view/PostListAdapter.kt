@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.numero.mvp_example.R
 import com.numero.mvp_example.model.Post
-import kotlinx.android.synthetic.main.view_holder_post.view.*
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.view_holder_post.*
 
 class PostListAdapter() : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
@@ -38,11 +39,11 @@ class PostListAdapter() : RecyclerView.Adapter<PostListAdapter.PostViewHolder>()
         return postList.size
     }
 
-    class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class PostViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun setPost(post: Post) {
-            itemView.titleTextView.text = post.title
-            itemView.bodyTextView.text = post.body
+            titleTextView.text = post.title
+            bodyTextView.text = post.body
         }
     }
 }
