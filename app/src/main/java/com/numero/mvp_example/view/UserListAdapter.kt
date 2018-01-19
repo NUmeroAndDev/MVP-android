@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.numero.mvp_example.R
 import com.numero.mvp_example.model.User
-import kotlinx.android.synthetic.main.view_holder_user.view.*
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.view_holder_user.*
 
 class UserListAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
@@ -41,15 +42,15 @@ class UserListAdapter(private val onClickListener: OnClickListener) : RecyclerVi
         return userList.size
     }
 
-    public interface OnClickListener {
+    interface OnClickListener {
         fun onClickUser(user: User)
     }
 
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(override val containerView: View?) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun setUser(user: User) {
-            itemView.nameTextView.text = user.name
-            itemView.userNameTextView.text = user.userName
+            nameTextView.text = user.name
+            userNameTextView.text = user.userName
         }
     }
 }
