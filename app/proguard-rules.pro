@@ -6,12 +6,6 @@
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 
-#Gson
--keep class com.google.gson.** { *; }
--keep class com.google.inject.** { *; }
--keep class com.fenrir.devicelist.response.** { *;}
--keep class com.fenrir.devicelist.model.** { *;}
-
 # moshi
 -dontwarn okio.**
 -dontwarn javax.annotation.**
