@@ -14,10 +14,6 @@
   name: OkHttp
   copyrightHolder: Square, Inc.
   license: apache2
-- artifact: com.squareup.retrofit2:converter-gson:+
-  name: "Converter: Gson"
-  copyrightHolder: Square, Inc.
-  license: apache2
 - artifact: com.squareup.retrofit2:adapter-rxjava2:+
   name: "Adapter: RxJava 2"
   copyrightHolder: Square, Inc.
@@ -26,6 +22,16 @@
   name: Okio
   copyrightHolder: Square, Inc.
   license: apache2
+- artifact: com.squareup.moshi:moshi:+
+  name: Moshi
+  copyrightHolder: Square, Inc.
+  license: Apache 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: https://github.com/square/moshi
+- artifact: com.squareup.moshi:moshi-kotlin:+
+  skip: true
+- artifact: com.squareup.retrofit2:converter-moshi:+
+  skip: true
 - artifact: org.jetbrains.kotlin:kotlin-stdlib:+
   name: org.jetbrains.kotlin:kotlin-stdlib
   copyrightHolder: JetBrains s.r.o.
@@ -42,10 +48,6 @@
   skip: true
 - artifact: android.arch.lifecycle:common:+
   skip: true
-- artifact: com.google.code.gson:gson:+
-  name: Gson
-  copyrightHolder: Google Inc.
-  license: apache2
 - artifact: io.reactivex.rxjava2:rxandroid:+
   name: RxAndroid
   copyrightHolder: The RxAndroid authors
@@ -59,4 +61,20 @@
   licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
   url: https://github.com/ReactiveX/RxJava
 - artifact: org.reactivestreams:reactive-streams:+
+  skip: true
+- artifact: com.google.dagger:dagger:+
+  name: Dagger
+  copyrightHolder: The Dagger Authors
+  license: Apache 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: https://github.com/google/dagger
+- artifact: com.google.dagger:dagger-android:+
+  skip: true
+- artifact: com.google.dagger:dagger-android-support:+
+  skip: true
+- artifact: javax.inject:javax.inject:+
+  skip: true
+- artifact: org.jetbrains.kotlin:kotlin-android-extensions-runtime:+
+  skip: true
+- artifact: org.jetbrains.kotlin:kotlin-reflect:+
   skip: true
