@@ -3,19 +3,29 @@ package com.numero.mvp_example.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.numero.mvp_example.R
+import com.numero.mvp_example.api.ApiCall
+import com.numero.mvp_example.extension.getComponent
+import com.numero.mvp_example.extension.replaceFragment
 import com.numero.mvp_example.fragment.PostListFragment
 import com.numero.mvp_example.model.User
 import com.numero.mvp_example.presenter.PostListPresenter
 import kotlinx.android.synthetic.main.activity_user_list.*
+import javax.inject.Inject
 
-class PostListActivity : BaseActivity() {
+class PostListActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var apiCall: ApiCall
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_list)
         setSupportActionBar(toolbar)
+
+        getComponent()?.inject(this)
 
         val user = intent.getSerializableExtra(BUNDLE_USER)
         if (user !is User) {
@@ -30,11 +40,11 @@ class PostListActivity : BaseActivity() {
             }
         }
 
-        val postListFragment: PostListFragment = supportFragmentManager.findFragmentById(R.id.container) as PostListFragment? ?:
+        val postListFragment: PostListFragment = supportFragmentManager.findFragmentById(R.id.container) as? PostListFragment ?:
                 PostListFragment.newInstance().also {
-                    replaceFragment(it)
+                    replaceFragment(R.id.container, it)
                 }
-        PostListPresenter(applicationContext, user, postListFragment)
+        PostListPresenter(apiCall, user, postListFragment)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -48,7 +58,7 @@ class PostListActivity : BaseActivity() {
     }
 
     companion object {
-        private val BUNDLE_USER: String = "BUNDLE_USER"
+        private const val BUNDLE_USER: String = "BUNDLE_USER"
         fun createIntent(context: Context, user: User): Intent = Intent(context, PostListActivity::class.java).apply {
             putExtra(BUNDLE_USER, user)
         }

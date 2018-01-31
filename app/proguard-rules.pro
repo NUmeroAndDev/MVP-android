@@ -6,11 +6,20 @@
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 
-#Gson
--keep class com.google.gson.** { *; }
--keep class com.google.inject.** { *; }
--keep class com.fenrir.devicelist.response.** { *;}
--keep class com.fenrir.devicelist.model.** { *;}
+# Kotlin
+-dontwarn org.jetbrains.annotations.**
+-keep class kotlin.Metadata { *; }
+
+# moshi
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keep @com.squareup.moshi.JsonQualifier interface *
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
 
 # RxJava
 -dontwarn sun.misc.**
@@ -24,3 +33,10 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
+
+# Dagger
+-keep class com.google.errorprone.annotations.** { *; }
+-dontwarn com.google.errorprone.annotations.**
+
+# Model
+-keep class com.numero.mvp_example.model.** { *;}

@@ -1,10 +1,9 @@
 package com.numero.mvp_example.model
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import java.io.Serializable
 
-class Post(
-        @field:SerializedName("userId") val userId: Long?,
-        @field:SerializedName("id") val id: Long?,
-        @field:SerializedName("title") val title: String?,
-        @field:SerializedName("body") val body: String?) : Serializable
+class Post(@Json(name = "userId") val userId: Long?,
+           @Json(name = "id") val id: Long?,
+           @Json(name = "title") val title: String?,
+           @Json(name = "body") val body: String?) : Serializable

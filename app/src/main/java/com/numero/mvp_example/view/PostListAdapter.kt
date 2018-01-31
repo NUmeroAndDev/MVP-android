@@ -9,7 +9,7 @@ import com.numero.mvp_example.model.Post
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.view_holder_post.*
 
-class PostListAdapter() : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
+class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
     private val postList: MutableList<Post> = mutableListOf()
 

@@ -1,16 +1,14 @@
 package com.numero.mvp_example.presenter
 
-import android.content.Context
-import com.numero.mvp_example.api.ApiClient
+import com.numero.mvp_example.api.ApiCall
 import com.numero.mvp_example.contract.PostListContract
 import com.numero.mvp_example.model.User
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class PostListPresenter(context: Context, private var user: User, private val view: PostListContract.View) : PostListContract.Presenter {
+class PostListPresenter(private var apiCall: ApiCall, private var user: User, private val view: PostListContract.View) : PostListContract.Presenter {
 
-    private val apiClient: ApiClient = ApiClient(context)
     private var disposable: Disposable? = null
 
     init {
@@ -40,7 +38,7 @@ class PostListPresenter(context: Context, private var user: User, private val vi
         }
         val userId: Long = user.id ?: return
         view.showProgress()
-        disposable = apiClient.loadPostList(userId)
+        disposable = apiCall.postList(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
