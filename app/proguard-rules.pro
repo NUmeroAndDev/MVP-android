@@ -6,6 +6,10 @@
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 
+# Kotlin
+-dontwarn org.jetbrains.annotations.**
+-keep class kotlin.Metadata { *; }
+
 # moshi
 -dontwarn okio.**
 -dontwarn javax.annotation.**
@@ -33,3 +37,6 @@
 # Dagger
 -keep class com.google.errorprone.annotations.** { *; }
 -dontwarn com.google.errorprone.annotations.**
+
+# Model
+-keep class com.numero.mvp_example.model.** { *;}
