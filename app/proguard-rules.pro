@@ -9,6 +9,9 @@
 # Kotlin
 -dontwarn org.jetbrains.annotations.**
 -keep class kotlin.Metadata { *; }
+-keep public class kotlin.reflect.jvm.internal.impl.builtins.* { public *; }
+# Kotlin 1.2.21 では以下の記述は不要ぽい?
+-dontwarn kotlin.reflect.jvm.internal.**
 
 # moshi
 -dontwarn okio.**
