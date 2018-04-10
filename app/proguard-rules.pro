@@ -1,41 +1,16 @@
 # Retrofit
--dontnote retrofit2.Platform
--dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
--keepattributes Exceptions
+-keepclassmembernames,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# OkHttp
+-dontwarn okhttp3.**
 -dontwarn okio.**
 -dontwarn javax.annotation.**
-
-# Kotlin
--dontwarn org.jetbrains.annotations.**
--keep class kotlin.Metadata { *; }
--keep public class kotlin.reflect.jvm.internal.impl.builtins.* { public *; }
-# Kotlin 1.2.21 では以下の記述は不要ぽい?
--dontwarn kotlin.reflect.jvm.internal.**
-
-# moshi
--dontwarn okio.**
--dontwarn javax.annotation.**
--keepclasseswithmembers class * {
-    @com.squareup.moshi.* <methods>;
-}
--keep @com.squareup.moshi.JsonQualifier interface *
--keepclassmembers class kotlin.Metadata {
-    public <methods>;
-}
-
-# RxJava
--dontwarn sun.misc.**
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-   long producerIndex;
-   long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
+-dontwarn org.conscrypt.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
 # Dagger
 -keep class com.google.errorprone.annotations.** { *; }
