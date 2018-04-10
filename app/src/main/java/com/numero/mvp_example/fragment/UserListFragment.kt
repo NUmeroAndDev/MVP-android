@@ -59,7 +59,7 @@ class UserListFragment : Fragment(), UserListContract.View, UserListAdapter.OnCl
     }
 
     override fun showUserList(userList: List<User>) {
-        userListAdapter.setUserList(userList)
+        userListAdapter.userList = userList
     }
 
     override fun showEmptyMessage() {

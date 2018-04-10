@@ -11,17 +11,14 @@ import kotlinx.android.synthetic.main.view_holder_user.*
 
 class UserListAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<UserListAdapter.UserViewHolder>() {
 
-    private val userList: MutableList<User> = mutableListOf()
-
-    fun setUserList(deviceInfoList: List<User>) {
-        this.userList.clear()
-        this.userList.addAll(deviceInfoList)
-        notifyDataSetChanged()
-    }
+    var userList: List<User> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     fun clear() {
-        this.userList.clear()
-        notifyDataSetChanged()
+        userList = listOf()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

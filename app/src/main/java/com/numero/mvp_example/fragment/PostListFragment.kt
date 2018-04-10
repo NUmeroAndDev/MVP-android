@@ -48,7 +48,7 @@ class PostListFragment : Fragment(), PostListContract.View {
     }
 
     override fun showPostList(postList: List<Post>) {
-        postAdapter.setUserList(postList)
+        postAdapter.postList = postList
     }
 
     override fun clearPostList() {

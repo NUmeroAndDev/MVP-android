@@ -11,17 +11,14 @@ import kotlinx.android.synthetic.main.view_holder_post.*
 
 class PostListAdapter : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
-    private val postList: MutableList<Post> = mutableListOf()
-
-    fun setUserList(postList: List<Post>) {
-        this.postList.clear()
-        this.postList.addAll(postList)
-        notifyDataSetChanged()
-    }
+    var postList: List<Post> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     fun clear() {
-        this.postList.clear()
-        notifyDataSetChanged()
+        postList = listOf()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
