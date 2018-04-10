@@ -1,11 +1,12 @@
 package com.numero.mvp_example.contract
 
 import com.numero.mvp_example.model.User
-import com.numero.mvp_example.presenter.BasePresenter
+import com.numero.mvp_example.presenter.IPresenter
+import com.numero.mvp_example.view.IView
 
 interface UserListContract {
 
-    interface View : BasePresenter.BaseView<Presenter> {
+    interface View : IView<Presenter> {
         fun selectUser(user: User)
 
         fun showUserList(userList: List<User>)
@@ -21,7 +22,7 @@ interface UserListContract {
         fun dismissProgress()
     }
 
-    interface Presenter : BasePresenter {
+    interface Presenter : IPresenter {
         fun selectUser(user: User)
 
         fun loadUserList()

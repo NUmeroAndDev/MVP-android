@@ -1,11 +1,12 @@
 package com.numero.mvp_example.contract
 
 import com.numero.mvp_example.model.Post
-import com.numero.mvp_example.presenter.BasePresenter
+import com.numero.mvp_example.presenter.IPresenter
+import com.numero.mvp_example.view.IView
 
 interface PostListContract {
 
-    interface View : BasePresenter.BaseView<Presenter> {
+    interface View : IView<Presenter> {
         fun showPostList(postList: List<Post>)
 
         fun clearPostList()
@@ -19,7 +20,7 @@ interface PostListContract {
         fun dismissProgress()
     }
 
-    interface Presenter : BasePresenter {
+    interface Presenter : IPresenter {
         fun loadPostList()
     }
 }
