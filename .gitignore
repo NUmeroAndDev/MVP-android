@@ -1,10 +1,6 @@
 *.iml
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
-/.idea/misc.xml
-/.idea/modules.xml
 .DS_Store
 /build
 /captures
@@ -12,3 +8,5 @@
 *.iml
 *.apk
 output.json
+.idea/*
+!.idea/codeStyles/*
