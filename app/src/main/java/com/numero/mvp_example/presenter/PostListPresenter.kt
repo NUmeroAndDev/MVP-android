@@ -5,38 +5,34 @@ import com.numero.mvp_example.model.User
 import com.numero.mvp_example.repository.IApiRepository
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.cancelChildren
 
 class PostListPresenter(private val apiRepository: IApiRepository, private var user: User, private val view: PostListContract.View) : PostListContract.Presenter {
 
-    private val job = Job()
+    private var job = Job()
 
     init {
         view.setPresenter(this)
     }
 
     override fun subscribe() {
-        view.clearPostList()
-        launch(job + UI) {
-            executeLoadPostList()
-        }
+        executeLoadPostList()
     }
 
     override fun unSubscribe() {
-        job.cancel()
+        job.cancelChildren()
     }
 
     override fun loadPostList() {
-        launch(job + UI) {
-            executeLoadPostList()
-        }
+        executeLoadPostList()
     }
 
-    private suspend fun executeLoadPostList() {
+    private fun executeLoadPostList() = async(job + UI) {
         if (user.id == null) {
             view.showErrorMessage(Exception("User id is null"))
         }
-        val userId: Long = user.id ?: return
+        val userId: Long = user.id ?: return@async
         view.showProgress()
         try {
             val postList = apiRepository.loadPostList(userId)

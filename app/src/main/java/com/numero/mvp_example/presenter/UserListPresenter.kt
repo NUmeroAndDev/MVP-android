@@ -5,7 +5,8 @@ import com.numero.mvp_example.model.User
 import com.numero.mvp_example.repository.IApiRepository
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.cancelChildren
 
 class UserListPresenter(private val apiRepository: IApiRepository, private val view: UserListContract.View) : UserListContract.Presenter {
 
@@ -17,13 +18,11 @@ class UserListPresenter(private val apiRepository: IApiRepository, private val v
 
     override fun subscribe() {
         view.clearUserList()
-        launch(job + UI) {
-            executeLoadUserList()
-        }
+        executeLoadUserList()
     }
 
     override fun unSubscribe() {
-        job.cancel()
+        job.cancelChildren()
     }
 
     override fun selectUser(user: User) {
@@ -31,12 +30,10 @@ class UserListPresenter(private val apiRepository: IApiRepository, private val v
     }
 
     override fun loadUserList() {
-        launch(job + UI) {
-            executeLoadUserList()
-        }
+        executeLoadUserList()
     }
 
-    private suspend fun executeLoadUserList() {
+    private fun executeLoadUserList() = async(job + UI) {
         view.showProgress()
         try {
             val userList = apiRepository.loadUserList()
