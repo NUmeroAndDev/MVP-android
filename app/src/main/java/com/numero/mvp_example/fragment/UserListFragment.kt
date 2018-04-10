@@ -1,8 +1,8 @@
 package com.numero.mvp_example.fragment
 
 import android.content.Context
-import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -20,8 +20,7 @@ class UserListFragment : Fragment(), UserListContract.View, UserListAdapter.OnCl
     private lateinit var presenter: UserListContract.Presenter
     private val userListAdapter: UserListAdapter = UserListAdapter(this)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_user_list, container, false)
     }
 

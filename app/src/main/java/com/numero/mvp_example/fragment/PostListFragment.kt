@@ -1,7 +1,7 @@
 package com.numero.mvp_example.fragment
 
-import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -18,8 +18,7 @@ class PostListFragment : Fragment(), PostListContract.View {
     private lateinit var presenter: PostListContract.Presenter
     private val postAdapter: PostListAdapter = PostListAdapter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_post_list, container, false)
     }
 

@@ -39,7 +39,7 @@ class ApiModule {
                 .baseUrl(BuildConfig.API_ENDPOINT)
                 .client(okHttpClient)
                 .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(ApplicationJsonAdapterFactory.INSTANCE).build()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
                 .build()
     }
 

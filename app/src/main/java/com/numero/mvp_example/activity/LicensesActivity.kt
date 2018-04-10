@@ -2,11 +2,11 @@ package com.numero.mvp_example.activity
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.net.toUri
 import com.numero.mvp_example.R
 import kotlinx.android.synthetic.main.activity_licenses.*
 
@@ -49,7 +49,7 @@ class LicensesActivity : AppCompatActivity() {
 
     private fun startSourceView() {
         startActivity(Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse(getString(R.string.source_url))
+            data = getString(R.string.source_url).toUri()
         })
     }
 
