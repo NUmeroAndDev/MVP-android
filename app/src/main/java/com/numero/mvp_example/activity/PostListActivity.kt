@@ -20,18 +20,16 @@ class PostListActivity : AppCompatActivity() {
     @Inject
     lateinit var apiCall: ApiCall
 
+    private val user: User by lazy {
+        intent.getSerializableExtra(BUNDLE_USER) as User
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_post_list)
         setSupportActionBar(toolbar)
 
         getComponent()?.inject(this)
-
-        val user = intent.getSerializableExtra(BUNDLE_USER)
-        if (user !is User) {
-            finish()
-            return
-        }
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
@@ -40,8 +38,8 @@ class PostListActivity : AppCompatActivity() {
             }
         }
 
-        val postListFragment: PostListFragment = supportFragmentManager.findFragmentById(R.id.container) as? PostListFragment ?:
-                PostListFragment.newInstance().also {
+        val postListFragment: PostListFragment = supportFragmentManager.findFragmentById(R.id.container) as? PostListFragment
+                ?: PostListFragment.newInstance().also {
                     replaceFragment(R.id.container, it)
                 }
         PostListPresenter(apiCall, user, postListFragment)

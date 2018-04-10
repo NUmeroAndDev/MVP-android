@@ -5,7 +5,6 @@ import com.numero.mvp_example.contract.UserListContract
 import com.numero.mvp_example.model.User
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class UserListPresenter(private val apiCall: ApiCall, private val view: UserListContract.View) : UserListContract.Presenter {
 
@@ -21,9 +20,9 @@ class UserListPresenter(private val apiCall: ApiCall, private val view: UserList
     }
 
     override fun unSubscribe() {
-        disposable?.let {
-            if (!it.isDisposed) {
-                it.dispose()
+        disposable?.apply {
+            if (isDisposed.not()) {
+                dispose()
             }
         }
     }
@@ -39,7 +38,6 @@ class UserListPresenter(private val apiCall: ApiCall, private val view: UserList
     private fun executeLoadUserList() {
         view.showProgress()
         disposable = apiCall.userList()
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     view.dismissProgress()
