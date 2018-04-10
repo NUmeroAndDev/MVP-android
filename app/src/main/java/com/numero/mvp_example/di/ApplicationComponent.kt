@@ -1,16 +1,28 @@
 package com.numero.mvp_example.di
 
-import com.numero.mvp_example.activity.PostListActivity
-import com.numero.mvp_example.activity.UserListActivity
+import android.app.Application
+import com.numero.mvp_example.MvpExampleApplication
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [(ApiModule::class)])
-interface ApplicationComponent {
+@Component(modules = [
+    (ApiModule::class),
+    (ActivityModule::class)
+])
+interface ApplicationComponent : AndroidInjector<MvpExampleApplication> {
 
-    fun inject(userListActivity: UserListActivity)
+    @Component.Builder
+    interface Builder {
 
-    fun inject(postListActivity: PostListActivity)
+        @BindsInstance
+        fun application(application: Application): Builder
+
+        fun build(): ApplicationComponent
+    }
+
+    fun inject(application: Application)
 
 }

@@ -1,19 +1,26 @@
 package com.numero.mvp_example
 
+import android.app.Activity
 import android.app.Application
-import com.numero.mvp_example.di.ApiModule
-import com.numero.mvp_example.di.ApplicationComponent
 import com.numero.mvp_example.di.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
 
-class MvpExampleApplication : Application() {
+class MvpExampleApplication : Application(), HasActivityInjector {
 
-    lateinit var applicationComponent: ApplicationComponent
+    @Inject
+    lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
 
-        applicationComponent = DaggerApplicationComponent.builder()
-                .apiModule(ApiModule())
+        DaggerApplicationComponent.builder()
+                .application(this)
                 .build()
+                .inject(this)
     }
+
+    override fun activityInjector(): AndroidInjector<Activity> = activityDispatchingAndroidInjector
 }

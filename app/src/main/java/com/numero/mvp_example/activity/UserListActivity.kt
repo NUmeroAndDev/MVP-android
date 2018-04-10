@@ -6,11 +6,10 @@ import android.view.Menu
 import android.view.MenuItem
 import com.numero.mvp_example.R
 import com.numero.mvp_example.api.ApiCall
-import com.numero.mvp_example.extension.getComponent
 import com.numero.mvp_example.extension.replaceFragment
 import com.numero.mvp_example.fragment.UserListFragment
 import com.numero.mvp_example.presenter.UserListPresenter
-
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_user_list.*
 import javax.inject.Inject
 
@@ -20,14 +19,13 @@ class UserListActivity : AppCompatActivity() {
     lateinit var apiCall: ApiCall
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_list)
         setSupportActionBar(toolbar)
 
-        getComponent()?.inject(this)
-
-        val userListFragment: UserListFragment = supportFragmentManager.findFragmentById(R.id.container) as? UserListFragment ?:
-                UserListFragment.newInstance().also {
+        val userListFragment: UserListFragment = supportFragmentManager.findFragmentById(R.id.container) as? UserListFragment
+                ?: UserListFragment.newInstance().also {
                     replaceFragment(R.id.container, it)
                 }
         UserListPresenter(apiCall, userListFragment)
