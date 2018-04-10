@@ -2,7 +2,7 @@ package com.numero.mvp_example.di
 
 import com.numero.mvp_example.BuildConfig
 import com.numero.mvp_example.api.ApiCall
-import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.numero.mvp_example.api.ApplicationJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -38,9 +38,7 @@ class ApiModule {
         return Retrofit.Builder()
                 .baseUrl(BuildConfig.API_ENDPOINT)
                 .client(okHttpClient)
-                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().apply {
-                    add(KotlinJsonAdapterFactory())
-                }.build()))
+                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().add(ApplicationJsonAdapterFactory.INSTANCE).build()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }
