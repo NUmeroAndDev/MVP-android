@@ -1,12 +1,12 @@
 package com.numero.mvp_example.presenter
 
-import com.numero.mvp_example.api.ApiCall
 import com.numero.mvp_example.contract.UserListContract
 import com.numero.mvp_example.model.User
+import com.numero.mvp_example.repository.IApiRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
-class UserListPresenter(private val apiCall: ApiCall, private val view: UserListContract.View) : UserListContract.Presenter {
+class UserListPresenter(private val apiRepository: IApiRepository, private val view: UserListContract.View) : UserListContract.Presenter {
 
     private var disposable: Disposable? = null
 
@@ -37,7 +37,7 @@ class UserListPresenter(private val apiCall: ApiCall, private val view: UserList
 
     private fun executeLoadUserList() {
         view.showProgress()
-        disposable = apiCall.userList()
+        disposable = apiRepository.loadUserList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     view.dismissProgress()

@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.numero.mvp_example.R
-import com.numero.mvp_example.api.ApiCall
 import com.numero.mvp_example.extension.replaceFragment
 import com.numero.mvp_example.fragment.UserListFragment
 import com.numero.mvp_example.presenter.UserListPresenter
+import com.numero.mvp_example.repository.ApiRepository
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_user_list.*
 import javax.inject.Inject
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class UserListActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var apiCall: ApiCall
+    lateinit var apiRepository: ApiRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -28,7 +28,7 @@ class UserListActivity : AppCompatActivity() {
                 ?: UserListFragment.newInstance().also {
                     replaceFragment(R.id.container, it)
                 }
-        UserListPresenter(apiCall, userListFragment)
+        UserListPresenter(apiRepository, userListFragment)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -39,7 +39,7 @@ class UserListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_licenses -> {
-                startActivity(LicensesActivity.createIntent(applicationContext))
+                startActivity(LicensesActivity.createIntent(this))
                 true
             }
             else -> super.onOptionsItemSelected(item)

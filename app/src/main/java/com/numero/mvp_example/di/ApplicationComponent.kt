@@ -10,7 +10,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     (ApiModule::class),
-    (ActivityModule::class)
+    (ActivityModule::class),
+    (RepositoryModule::class)
 ])
 interface ApplicationComponent : AndroidInjector<MvpExampleApplication> {
 
