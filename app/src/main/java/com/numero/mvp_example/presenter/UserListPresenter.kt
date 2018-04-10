@@ -3,12 +3,13 @@ package com.numero.mvp_example.presenter
 import com.numero.mvp_example.contract.UserListContract
 import com.numero.mvp_example.model.User
 import com.numero.mvp_example.repository.IApiRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 
 class UserListPresenter(private val apiRepository: IApiRepository, private val view: UserListContract.View) : UserListContract.Presenter {
 
-    private var disposable: Disposable? = null
+    private val job = Job()
 
     init {
         view.setPresenter(this)
@@ -16,15 +17,13 @@ class UserListPresenter(private val apiRepository: IApiRepository, private val v
 
     override fun subscribe() {
         view.clearUserList()
-        executeLoadUserList()
+        launch(job + UI) {
+            executeLoadUserList()
+        }
     }
 
     override fun unSubscribe() {
-        disposable?.apply {
-            if (isDisposed.not()) {
-                dispose()
-            }
-        }
+        job.cancel()
     }
 
     override fun selectUser(user: User) {
@@ -32,24 +31,24 @@ class UserListPresenter(private val apiRepository: IApiRepository, private val v
     }
 
     override fun loadUserList() {
-        executeLoadUserList()
+        launch(job + UI) {
+            executeLoadUserList()
+        }
     }
 
-    private fun executeLoadUserList() {
+    private suspend fun executeLoadUserList() {
         view.showProgress()
-        disposable = apiRepository.loadUserList()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view.dismissProgress()
-                    if (it.isEmpty()) {
-                        view.showEmptyMessage()
-                    } else {
-                        view.showUserList(it)
-                    }
-                }, {
-                    view.dismissProgress()
-                    view.showErrorMessage(it)
-                })
+        try {
+            val userList = apiRepository.loadUserList()
+            view.dismissProgress()
+            if (userList.isEmpty()) {
+                view.showEmptyMessage()
+            } else {
+                view.showUserList(userList)
+            }
+        } catch (t: Throwable) {
+            view.dismissProgress()
+            view.showErrorMessage(t)
+        }
     }
-
 }

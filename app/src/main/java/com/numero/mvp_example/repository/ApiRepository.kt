@@ -3,11 +3,16 @@ package com.numero.mvp_example.repository
 import com.numero.mvp_example.api.ApiCall
 import com.numero.mvp_example.model.Post
 import com.numero.mvp_example.model.User
-import io.reactivex.Observable
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.withContext
 
 class ApiRepository(private val apiCall: ApiCall) : IApiRepository {
 
-    override fun loadPostList(userId: Long): Observable<List<Post>> = apiCall.postList(userId)
+    override suspend fun loadPostList(userId: Long): List<Post> = withContext(CommonPool) {
+        apiCall.postList(userId).await()
+    }
 
-    override fun loadUserList(): Observable<List<User>> = apiCall.userList()
+    override suspend fun loadUserList(): List<User> = withContext(CommonPool) {
+        apiCall.userList().await()
+    }
 }

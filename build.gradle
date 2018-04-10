@@ -3,8 +3,6 @@ buildscript {
     ext.ktx_version = '0.3'
     ext.support_library_version = '27.1.0'
     ext.dagger_version = '2.15'
-    ext.rxandroid_version = '2.0.2'
-    ext.rxjava_version = '2.1.12'
     ext.okhttp_version = '3.10.0'
     ext.kotshi_version = '1.0.2'
     ext.retrofit_version = '2.4.0'
