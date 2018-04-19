@@ -36,7 +36,7 @@ class UserListPresenter(private val apiRepository: IApiRepository, private val v
     private fun executeLoadUserList() = async(job + UI) {
         view.showProgress()
         try {
-            val userList = apiRepository.loadUserList()
+            val userList = apiRepository.loadUserList().await()
             view.dismissProgress()
             if (userList.isEmpty()) {
                 view.showEmptyMessage()

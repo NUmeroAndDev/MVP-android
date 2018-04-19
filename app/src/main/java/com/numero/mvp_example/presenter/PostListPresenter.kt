@@ -35,7 +35,7 @@ class PostListPresenter(private val apiRepository: IApiRepository, private var u
         val userId: Long = user.id ?: return@async
         view.showProgress()
         try {
-            val postList = apiRepository.loadPostList(userId)
+            val postList = apiRepository.loadPostList(userId).await()
             view.dismissProgress()
             if (postList.isEmpty()) {
                 view.showEmptyMessage()
